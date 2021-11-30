@@ -1,0 +1,24 @@
+program: nate_fracture.py
+project: fracture
+entity: unr-mpl
+method: bayes
+early_terminate:
+  type: hyperband
+  min_iter: 10
+metric:
+  name: Distance_From_Actual-Epoch
+  goal: minimize
+parameters:
+  epochs:
+    values: [100]
+  learning_rate:
+    min: 0.0001
+    max: 0.1
+  optimizer:
+    values: ["AdamW", "Adam", "SGD", "AdaGrad"]
+  scheduler:
+    values: ["ReduceLROnPlateau", "CosineAnnealingLR", "MultiplicativeLR", "None"]
+  loss_function:
+    values: ["L1Loss", "MSELoss", "HuberLoss", "SmoothL1Loss"]
+  image_size:
+    values: ["fracture_dataset.csv", "fracture_dataset_224x168.csv", "fracture_dataset_160x120.csv"]
